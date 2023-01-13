@@ -17,23 +17,28 @@ class   NumPyCreator:
             return None
         
     def from_iterable(self, itr):
-        """"""
+        try:
+          return np.fromiter(itr, type(itr))
+        except:
+          None
         
-    def from_shape(self, shape, value):
-        """"""
+    def from_shape(self, shape, value=0):
+        try:
+          return np.full(shape, value)
+        except:
+          return None
         
     def random(self, shape):
-        """"""
+        try:
+          return np.random.rand(shape[0], shape[1])
+        except:
+          return None
         
     def identity(self, n):
-        """"""
-        
-npc = NumPyCreator()
+        try:
+          return np.identity(n)
+        except:
+          return None
 
-print(npc.from_list([[1,2,3],[6,3,4]]))
-print(npc.from_list([[1,2,3],[6,4]]))
-print(npc.from_list([[1,2,3],['a','b','b'],[6,4,7]]))
-print(npc.from_list(((1,2),(3,4))))
 
-print(npc.from_tuple(("a", "b", "c")))
-print(npc.from_tuple(["a", "b", "c"]))
+
