@@ -18,7 +18,9 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        imgplot = plt.imshow(array)
+        inverted = 1 - array
+        inverted[..., 3:] = array[..., 3:]
+        plt.imshow(inverted)
         plt.show()
         
     def to_blue(self, array):

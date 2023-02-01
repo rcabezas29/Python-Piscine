@@ -1,3 +1,5 @@
+import numpy as np
+
 class   ScrapBooker:
     def __init__(self) -> None:
         pass
@@ -14,11 +16,12 @@ class   ScrapBooker:
         Return:
         -------
         new_arr: the cropped numpy.ndarray.
-        None (if combinaison of parameters not compatible).
+        None (if combination of parameters not compatible).
         Raise:
         ------
         This function should not raise any Exception.
         """
+        return array[position[0]:position[0]+dim[0], position[1]:position[1]+dim[1]]
         
     def thin(self, array, n, axis):
         """
@@ -37,6 +40,7 @@ class   ScrapBooker:
         ------
         This function should not raise any Exception.
         """
+        return np.delete(array, n, axis)
 
     def juxtapose(self, array, n, axis):
         """
@@ -54,6 +58,7 @@ class   ScrapBooker:
         -------
         This function should not raise any Exception.
         """
+        return np.repeat(array, n, axis)
 
     def mosaic(self, array, dim):
         """
@@ -71,3 +76,4 @@ class   ScrapBooker:
         -------
         This function should not raise any Exception.
         """
+        return np.tile(array, dim)
