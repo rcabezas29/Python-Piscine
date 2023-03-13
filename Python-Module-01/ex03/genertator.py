@@ -8,18 +8,17 @@ def generator(text, sep=" ", option=None):
         print("ERROR")
         exit(1)
     words = text.split(sep)
-    match option:
-        case "shuffle":
+    if option == "shuffle":
             random.shuffle(words)
-        case "unique":
-            appear =[]
-            for word in words:
-                if word in appear:
-                    continue
-                appear.append(word)
-            words = appear
-        case "ordered":
-            words.sort()
+    elif option == "unique":
+        appear =[]
+        for word in words:
+            if word in appear:
+                continue
+            appear.append(word)
+        words = appear
+    elif option == "ordered":
+        words.sort()
     for word in words:
         yield word
     

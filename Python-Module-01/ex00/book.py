@@ -12,23 +12,29 @@ class   Book:
             "dessert": []
         }
         for rec in recipes_list:
-            match rec.get_type():
-                case "starter":
-                    self.recipes_list["starter"].append(rec)
-                case "lunch":
-                    self.recipes_list["lunch"].append(rec)
-                case "dessert":
-                    self.recipes_list["dessert"].append(rec)
+            if rec.get_type() == "starter":
+                self.recipes_list["starter"].append(rec)
+            elif rec.get_type() == "lunch":
+                self.recipes_list["lunch"].append(rec)
+            elif rec.get_type() == "dessert":
+                self.recipes_list["dessert"].append(rec)
                     
                     
-    def get_recipe_by_name(self, name):
+    def get_recipe_by_name(self, name) -> recipe:
         """Prints a recipe with the name \texttt{name} and returns the instance"""
-        #... Your code here ...
+        for recipe_type in self.recipes_list:
+            if name in recipe_type:
+                print(str(recipe_type[name]))
+                return recipe_type[name]
+            
 
     def get_recipes_by_types(self, recipe_type):
         """Get all recipe names for a given recipe_type """
-        #... Your code here ...
+        if recipe_type in self.recipes_list:
+            return self.recipes_list[recipe_type]
+        else:
+            print('Recipe type not found')
     
-    def add_recipe(self, recipe):
+    def add_recipe(self, rec: recipe):
         """Add a recipe to the book and update last_update"""
-        #... Your code here ...
+        self.recipes_list[rec.get_type()].append(rec)
