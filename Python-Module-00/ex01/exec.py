@@ -10,4 +10,4 @@ if __name__ == '__main__':
             elif c.isupper:
                 word += c.lower()
         s += word + " "
-    print(s[:-1])
+    print(s[::-1])
