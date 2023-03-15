@@ -2,11 +2,20 @@ import time
 from random import randint
 import os
 
-def log():
-    """"""
+def log(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        with open('machine.log', 'a') as file:
+            file.write(f'(rcabezas)Running: {func.__name__} [ exec-time = {end_time - start_time} s]\n')
+        return result
+    return wrapper
+
 
 class CoffeeMachine():
     water_level = 100
+
     @log
     def start_machine(self):
         if self.water_level > 20:
