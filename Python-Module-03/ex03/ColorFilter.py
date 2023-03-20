@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 class   ColorFilter:
     def __init__(self) -> None:
@@ -37,6 +38,11 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
+        b = array.copy()
+        b[:, :, 1] = 0
+        b[:, :, 2] = 0
+        plt.imshow(b)
+        plt.show()
         
     def to_green(self, array):
         """
@@ -52,6 +58,11 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
+        g = array.copy()
+        g[:, :, 0] = 0
+        g[:, :, 2] = 0
+        plt.imshow(g)
+        plt.show()
         
     def to_red(self, array):
         """
@@ -67,7 +78,12 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        
+        r = array.copy()
+        r[:, :, 0] = 0
+        r[:, :, 1] = 0
+        plt.imshow(r)
+        plt.show()
+
     def to_celluloid(self, array):
         """
         Applies a celluloid filter to the image received as a numpy array.
@@ -87,6 +103,12 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
+        c = array.copy()
+        treshholds = np.linspace(0.0, 1.0, num=4, endpoint=False)
+        for shade in treshholds:
+            c[array >= shade] = shade
+        plt.imshow(c)
+        plt.show()
         
     def to_grayscale(self, array, filter, **kwargs):
         """
@@ -107,3 +129,18 @@ class   ColorFilter:
         -------
         This function should not raise any Exception.
         """
+        g = array.copy()
+        for row in g:
+            for col in row:
+                if filter == 'm' or filter == 'mean':
+                    gray = col.sum() / 3
+                    col[0] = gray
+                    col[1] = gray
+                    col[2] = gray
+                elif filter == 'w' or filter == 'weight':
+                    weights = np.array(kwargs['weights'])
+                    gray = col.sum() / 3
+                    for i, weight in enumerate(weights):
+                        col[i] = weight * gray
+        plt.imshow(g)
+        plt.show()
